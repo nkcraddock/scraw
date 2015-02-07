@@ -16,8 +16,7 @@ It is based on [phusion/baseimage](http://phusion.github.io/baseimage-docker).
 $ sudo docker pull nkcraddock/scraw
 $ sudo docker run -d --name scraw nkcraddock/scraw
 $ sudo docker-ssh scraw
-
-$ ~/init_homesick
+root@899e0eeea86d:~# ~/init_homesick
 ````
 
     

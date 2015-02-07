@@ -8,7 +8,9 @@ RUN apt-get update && apt-get install -y \
   curl \
   ruby1.9.1 \
   wget \
-  mercurial
+  mercurial \
+  tmux
+
 
 RUN wget https://storage.googleapis.com/golang/go1.4.1.linux-amd64.tar.gz && \
   tar -C /usr/local -xzf go1.4.1.linux-amd64.tar.gz && \
