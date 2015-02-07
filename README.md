@@ -2,7 +2,7 @@
 `nkcraddock/scraw` is a docker container with my development environment set up on it. 
 It is based on [phusion/baseimage](http://phusion.github.io/baseimage-docker).
 
-![SCRAWWW](http://i.imgur.com/EJKiGWX.png)
+[![SCRAWWW](http://i.imgur.com/EJKiGWX.png)](https://www.youtube.com/watch?v=a3I5h7UaOuk)
 
 ####Features
 * From `phusion/baseimage` we get **init**, **syslogd**, **sshd**, and some other goodies to make the container feel more like a VM
