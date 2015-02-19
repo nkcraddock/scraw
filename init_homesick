@@ -1,4 +1,5 @@
 #!/bin/bash
+HOMESICK_CASTLE="nkcraddock/dotfiles"
 
 # set up castle
 export CASTLE_NAME=`echo $HOMESICK_CASTLE | sed "s/[^\/]*\///"`

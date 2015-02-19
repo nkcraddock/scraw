@@ -2,6 +2,7 @@ FROM phusion/baseimage
 
 ENV HOME /root
 
+# install all that good stuff
 RUN apt-get update && apt-get install -y \
   git \
   vim \
@@ -9,15 +10,13 @@ RUN apt-get update && apt-get install -y \
   ruby1.9.1 \
   wget \
   mercurial \
-  tmux
-
-
-RUN wget https://storage.googleapis.com/golang/go1.4.1.linux-amd64.tar.gz && \
-  tar -C /usr/local -xzf go1.4.1.linux-amd64.tar.gz && \
+  tmux && \
+  apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  
+# install go
+RUN wget https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz && \
+  tar -C /usr/local -xzf go1.4.2.linux-amd64.tar.gz && \
   mkdir -p ~/dev/go/src/github.com
-
-# clean out root's bash and profile
-RUN rm ~/.bashrc ~/.profile 
 
 # Add homesick
 RUN gem install homesick 
@@ -31,12 +30,17 @@ RUN /usr/sbin/enable_insecure_key
 # Use baseimage-docker's init process
 CMD ["/sbin/my_init"]
 
-# Setup environment variables
-ENV HOMESICK_CASTLE nkcraddock/dotfiles
+# create user directory
+RUN mkdir -p /home/scraw/.ssh
 
 # Add scripts
-ADD .bash_local /root/.bash_local
-ADD init_homesick /root/ 
+ADD .bash_local /home/scraw/
+ADD init_homesick /home/scraw/
 
-# Clean up APT
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# add the scraw user. (password: scraw)
+RUN \
+    useradd -p $(echo "scraw" | openssl passwd -1 -stdin) -g root -s /bin/bash scraw && \
+    adduser scraw sudo && \
+    cp /root/.ssh/authorized_keys /home/scraw/.ssh && \
+    chown scraw /home/scraw -R
+
