@@ -10,7 +10,9 @@ RUN apt-get update && apt-get install -y \
   ruby1.9.1 \
   wget \
   mercurial \
-  tmux && \
+  tmux \
+  build-essential \
+  silversearcher-ag && \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
   
 # install go
@@ -19,7 +21,7 @@ RUN wget https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz && \
   mkdir -p ~/dev/go/src/github.com
 
 # Add homesick
-RUN gem install homesick 
+RUN gem install homesick gitignore 
 
 # enable sshd
 RUN rm -rf /etc/service/sshd/down
