@@ -244,7 +244,7 @@ autocmd FileType html,css EmmetInstall
 " NERDTree
 "
 " NERDTree ignores
-let g:NERDTreeIgnore=['tags']
+let g:NERDTreeIgnore=['^tags$']
 
 " Auto-open nerdtree on open
 "autocmd StdinReadPre * let s:std_in=1

@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 # vim: filetype=sh
-SCRAW="${1:-'nkcraddock/scraw:latest'}"
+
+SCRAW=nkcraddock/scraw:latest
+if [ ! -z $1 ]; then
+  SCRAW=$1
+fi
+
 DIR="${HOME}/.scraw"
 DIRSSH="$DIR/.ssh"
 DIRSOCK="$DIR/.sock"
