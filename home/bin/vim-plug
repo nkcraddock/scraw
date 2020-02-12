@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# vim: filetype=sh
+
+mkdir -p ~/.vim/autoload ~/.vim/bundle
+# make sure we have pathogen
+if [ ! -e ~/.vim/autoload/pathogen.vim ]; then
+  curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+fi
+
+## install all the plugins
+VIM_PLUGINS=$(cat $HOME/.vim-plugins)
+for plugin in $VIM_PLUGINS; do
+  plugin_name="${plugin##*/}"
+  echo "plugin ${plugin} ${plugin_name}"
+
+  echo
+  if [ ! -d $HOME/.vim/bundle/$plugin_name ]; then
+    echo "vim-plug: $plugin not found. Installing"
+    git clone --recurse-submodules --depth=1 "https://github.com/$plugin" "$HOME/.vim/bundle/$plugin_name"
+  else
+    echo "vim-plug: $plugin found. Checking for updates"
+    cd "$HOME/.vim/bundle/$plugin_name" && git pull
+  fi
+done
+

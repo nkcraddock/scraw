@@ -1,2 +1,5 @@
 .*.swo
 .*.swp
+.env
+.secrets/
+tags
