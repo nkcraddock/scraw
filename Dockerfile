@@ -12,7 +12,7 @@ RUN apt-get update \
   mercurial \
   silversearcher-ag \
   wget \
-  vim \
+  vim-gtk \
   tmux \
   tmate \
   sudo \
@@ -47,12 +47,12 @@ COPY home/ /root/
 RUN /root/bin/install-node
 
 # Setting up YouCompleteMe
-#RUN apt-get update \
-  #&& apt install -y cmake python3-dev \
-  #&& cd ~/.vim/bundle/youcompleteme && ./install.sh && cd - \
-  #&& echo "Cleaning up" \
-  #&& apt-get clean \
-  #&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get update \
+  && apt install -y cmake python3-dev \
+  && cd ~/.vim/bundle/youcompleteme && ./install.sh && cd - \
+  && echo "Cleaning up" \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV LANG C.UTF-8  
 ENV LC_ALL C.UTF-8   
