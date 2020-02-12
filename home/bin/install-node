@@ -1,0 +1,20 @@
+#!/usr/bin/env bash                                                                                                          
+# vim: filetype=sh                                                                                                           
+                                                                                                                             
+if [ -f $HOME/.nvm/nvm.sh ]; then                                                                                            
+  source $HOME/.nvm/nvm.sh                                                                                                   
+else                                                                                                                         
+  # Install the latest version of NVM                                                                                        
+  LATEST_NVM=$(curl -LSs https://api.github.com/repos/creationix/nvm/releases/latest | jq -r '.tag_name')                    
+  curl -LSs https://raw.githubusercontent.com/creationix/nvm/$LATEST_NVM/install.sh | bash                                   
+  # Add NVM to bash_local so it'll work in the shell                                                                         
+  echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bash_local                                                                        
+  echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.bash_local                                                   
+  # load NVM so we can use it to install node                                                                                
+  export NVM_DIR="$HOME/.nvm"                                                                                                
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                                                                           
+fi                                                                                                                           
+                                                                                                                             
+nvm install --lts                                                                                                            
+                                                                                                                             
+npm install -g yarn
