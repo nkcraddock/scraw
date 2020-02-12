@@ -21,4 +21,4 @@ fi
 
 echo "running $SCRAW"
 
-docker run -v $DIRSSH:/root/.ssh -v $(pwd):/root/dev --rm -it --hostname "SCRAWWWWWWWW" $SCRAW 
+docker run -v $DIRSSH:/root/.ssh -v $(pwd):/root/dev --rm -it --hostname "SCRAWWWWWWWW" --net=bridge $SCRAW 
