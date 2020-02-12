@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# vim: filetype=sh
+if [ ! -e ./home/.ssh/id_rsa ]; then                                                                                                                          
+  HOSTNAME=`SCRAW` ssh-keygen -t rsa -C "$HOSTNAME" -f home/.ssh/id_rsa -P ""
+fi
+docker build -t scraw . \
+&& docker run -v $(pwd):/root/dev --rm -it --hostname "SCRAWWWWWWWW" scraw
