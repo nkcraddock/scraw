@@ -9,6 +9,13 @@ Scraw!
 # Getting Started
 ````
 git clone github.com:nkcraddock/scraw
-./scraw
+cd scraw
+sudo ./install.sh
+...
 
+cd ~/dev/project
+scraw
+SCRAWWWWW$ tmstart
+# copy the ssh keys for your buddies
+SCRAWWWWW$ tmattach
 ````

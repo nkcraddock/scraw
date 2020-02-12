@@ -1,7 +1,19 @@
 #!/usr/bin/env bash
 # vim: filetype=sh
-if [ ! -e ./home/.ssh/id_rsa ]; then                                                                                                                          
-  HOSTNAME=`SCRAW` ssh-keygen -t rsa -C "$HOSTNAME" -f home/.ssh/id_rsa -P ""
+SCRAW="${1:-'nkcraddock/scraw:latest'}"
+DIR="${HOME}/.scraw"
+DIRSSH="$DIR/.ssh"
+DIRSOCK="$DIR/.sock"
+
+
+[ ! -d "$DIRSSH" ] && mkdir -p $DIRSSH
+[ ! -d "$DIRSOCK" ] && mkdir -p $DIRSOCK
+
+if [ ! -e $DIRSSH/id_rsa ]; then                                                                                                                          
+  echo "Generating ssh keys in $DIRSSH"
+  ssh-keygen -t rsa -C "SCRAW" -f $DIRSSH/id_rsa -P ""
 fi
-docker build -t scraw . \
-&& docker run -v $(pwd):/root/dev --rm -it --hostname "SCRAWWWWWWWW" scraw
+
+echo "running $SCRAW"
+
+docker run -v $DIRSSH:/root/.ssh -v $(pwd):/root/dev --rm -it --hostname "SCRAWWWWWWWW" $SCRAW 

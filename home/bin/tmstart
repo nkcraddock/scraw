@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# vim: filetype=sh
+
+SOCK=/tmp/tmate.sock
+
+tmate -S $SOCK new-session -d
+tmate -S $SOCK wait tmate-ready
+tmate -S $SOCK display -p '#{tmate_ssh}'
+tmate -S $SOCK display -p '#{tmate_ssh_ro}'

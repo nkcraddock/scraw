@@ -20,7 +20,7 @@ RUN apt-get update \
       autoconf \ 
       pkg-config \
       locales \
-      xclip \
+      httpie \
   && dpkg-reconfigure --frontend=noninteractive locales \
   && echo "Installing ctags" \
   && git clone -q --depth=1 https://github.com/universal-ctags/ctags.git /tmp/ctags \
