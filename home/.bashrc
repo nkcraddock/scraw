@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# vim on the track
+set -o vi
+
 # Add ~/bin to path
 PATH="$HOME/bin:$PATH"
 

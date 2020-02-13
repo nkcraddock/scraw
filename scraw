@@ -21,10 +21,9 @@ if [ ! -e $DIRSSH/id_rsa ]; then
   ssh-keygen -t rsa -C "SCRAW" -f $DIRSSH/id_rsa -P ""
 fi
 
-echo "running $SCRAW"
-
-if $(docker network ls | grep $DOCKER_NETWORK &> /dev/null); then
-  echo "create network"
+# auto-create the scraw network
+if ! $(docker network ls | grep $DOCKER_NETWORK &> /dev/null); then
+  docker network create scraw
 fi
 docker run --name $CONTAINER_NAME -v $DIRSSH:/root/.ssh -v $(pwd):/root/dev --rm -it --hostname "SCRAW" --net=$DOCKER_NETWORK $SCRAW 
 docker network connect $DOCKER_NETWORK $CONTAINER_NAME
