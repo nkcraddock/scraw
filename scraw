@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # vim: filetype=sh
 
+DOCKER_NETWORK=scraw
+CONTAINER_NAME=scraw
 SCRAW=nkcraddock/scraw:latest
 if [ ! -z $1 ]; then
   SCRAW=$1
@@ -21,4 +23,8 @@ fi
 
 echo "running $SCRAW"
 
-docker run -n scraw -v $DIRSSH:/root/.ssh -v $(pwd):/root/dev --rm -it --hostname "SCRAWWWWWWWW" --net=bridge $SCRAW 
+if $(docker network ls | grep $DOCKER_NETWORK &> /dev/null); then
+  echo "create network"
+fi
+docker run --name $CONTAINER_NAME -v $DIRSSH:/root/.ssh -v $(pwd):/root/dev --rm -it --hostname "SCRAW" --net=$DOCKER_NETWORK $SCRAW 
+docker network connect $DOCKER_NETWORK $CONTAINER_NAME

@@ -54,6 +54,16 @@ RUN apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" \
+    | tee /etc/apt/sources.list.d/mongodb-org-4.0.list \
+  && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 \
+    --recv 9DA31620334BD75D9DCB49F368818C72E52529D4 \
+  && apt update -y\
+  && apt install -y mongodb-org-shell \
+  && echo "Cleaning up" \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 ENV LANG C.UTF-8  
 ENV LC_ALL C.UTF-8   
 
